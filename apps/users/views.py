@@ -13,7 +13,7 @@ def index(request):
 def login(request):
     now = datetime.datetime.now()
     my_data = {}
-    return render_to_response( 'users/login.html', my_data, context_instance=RequestContext(request) )
+    return render_to_response( 'users/dashboard.html', my_data, context_instance=RequestContext(request) )
 
 def new(request):
     my_data = {}
@@ -36,8 +36,8 @@ def do_login(request):
 def about(request):
     return render_to_response( 'about.html', context_instance=RequestContext(request) )
 
-def bands(request):
-    return render_to_response( 'bands.html', context_instance=RequestContext(request) )
+# def bands(request):
+#     return render_to_response( 'bands.html', context_instance=RequestContext(request) )
 
 def events(request):
     return render_to_response( 'events.html', context_instance=RequestContext(request) )

@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% block content %}
 
 <script type="text/javascript">
 	$(document).ready(function()
@@ -30,7 +29,16 @@
 	});
 </script>
 
+{% block content %}
 <div class="container">
+	<ul class="breadcrumb">
+		<li><a href="#">audioarchitect</a> <span class="divider">/</span></li>
+		<li><a href="#">Dashboard</a> <span class="divider">/</span></li>
+		<li><a href="#">Bang On</a> <span class="divider">/</span></li>
+		<li><a href="#">Event title</a> <span class="divider">/</span></li>
+		<li class="active">Setlist</li>
+	</ul>
+
 	<div id="songs" class="pull-left span6">
 		<h3>Add a song to your song bank</h3>
 		<form action="/setlist/add_song" method="post" >

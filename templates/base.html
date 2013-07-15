@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     {% load staticfiles %}
-    <link rel="stylesheet" href="{% "static bootstrap.css" }%">
+    <!-- <link rel="stylesheet" href="{% "static bootstrap.css" }%"> -->
     <link rel="stylesheet" href="{{STATIC_URL}}css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css"> -->
+    <!-- // <script src="{{STATIC_URL}}js/bootstrap.min.js"></script> -->
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/bootswatch.css">
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/smoothness/jquery-ui-1.10.3.custom.min.css">
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/timepicker/jquery.timepicker.css">
-    <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+    
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
@@ -21,13 +22,13 @@
     <div class="navbar row-fluid">
         <div class="navbar-inner">
             <ul class="nav">
-                <li><a class="brand" href="/home/about"><em>Epstein</em></a></li>
+                <li><a class="brand" href="/about"><em>Epstein</em></a></li>
                 <li><a href="/bands">Bands</a></li>
-                <li><a href="#">Shows</a></li>
+                <li><a href="/events">Events</a></li>
     
             </ul>
             <ul class="nav pull-right">
-                <li><a href="/home/log_out">Log Out</a></li>
+                <li><a href="/logout">Log Out</a></li>
             </ul>
         </div>
     </div>
