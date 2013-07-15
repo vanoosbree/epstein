@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Epstein - Dashboard</title>
+	<link rel="stylesheet" href="css/bootstrap.css"/>
+	<link rel="stylesheet" href="css/bic_calendar.css"/>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>	
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>	
+	<script src="js/bic_calendar.min.js" type="text/javascript"></script>	
+	<script type="text/javascript" src="js/angular.min.js" ></script>
+	<script type="text/javascript" src="js/app.js" ></script>
+	<script type="text/javascript">
+		$(document).ready( function()
+		{
+			mesos = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+			dias = ["S", "M", "T", "W", "T", "F", "S"];
+
+			$('#calendar').bic_calendar(
+			{
+    			nombresMes: mesos,
+    			dias: dias,
+    			req_ajax: { type: 'get', url: 'data.php' }
+			});
+		});
+	</script>
+</head>
+<body ng-app="">
+
+	<!-- Navigation bar -->
+	<div class="navbar">
+        <div class="navbar-inner">
+            <a class="brand" href="#">Epstein</a>
+            <ul class="nav">
+                <li><a href="#">Register</a></li>
+                <li><a href="#">Do Something</a></li>
+            </ul>
+            <a class="nav" href="#"><i class="icon-calendar"></i></a>
+        </div>
+    </div>
+
+	<!-- main content -->
+	<div class="container" ng-controller="DashboardController">
+		<div class="row">
+			
+			<!-- Shows -->
+			<div class="span9">
+				<fieldset>
+				<legend>Events</legend>
+
+				<table class="table table-striped">
+					<thead>
+					<tr>
+						<td>Date</td>
+						<td>Place</td>
+						<td>Description</td>
+						<td>Actions</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Tomorrow</td>
+						<td>Cool Venue</td>
+						<td>Go or die!</td>
+						<td><a href="#">[View]</a><a href="#">[Edit]</a><a href="#">[Delete]</a></td>
+
+					
+					</tr>
+				</table>
+				</fieldset>
+			</div>
+
+			<!-- Calendar -->
+			<div class="span3">
+				<fieldset>
+				<legend>Calendar</legend>
+
+				<div id='calendar'></div>
+				</fieldset>
+				<br>
+				<fieldset>
+				<legend>Songs/Setlists</legend>
+
+				<ul class='nav nav-pills nav-stacked'>
+					<li ng-repeat="band in bands" class='dropdown'>
+						<a class="dropdown-toggle" data-toggle='dropdown' href="#">{{band}} <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Profile</a></li>
+							<li><a href="#">Events</a></li>
+						</ul>
+					</li>
+				</ul>
+				<a class='btn' href="#">Manage Songs</a>
+				</fieldset>
+			</div>
+		</div>
+	</div> <!-- div container/DashboardController -->
+
+	<footer class="container">
+		Placeholder for footer
+	</footer>
+</body>
+</html>

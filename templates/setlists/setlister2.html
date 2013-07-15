@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" ng-app="taskboard">
+<head>
+	<meta charset="UTF-8">
+	<title>Epstein - Dashboard</title>
+
+	<link href="css/styles.css" rel="stylesheet">
+  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.jsssss"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+   
+    <script type="text/javascript" src="js/angular.min.js" ></script>
+    <script src="https://rawgithub.com/angular-ui/ui-sortable/master/src/sortable.js"></script>
+    <script src="js/multiSortable.js"></script>
+
+</head>
+<body ng-controller="TaskController">
+
+	<!-- Navigation bar -->
+	<!-- <div class="navbar">
+        <div class="navbar-inner">
+            <a class="brand" href="#">Epstein</a>
+            <ul class="nav">
+                <li><a href="#">Register</a></li>
+                <li><a href="#">Do Something</a></li>
+            </ul>
+            <a class="nav" href="#"><i class="icon-calendar"></i></a>
+        </div>
+    </div> -->
+
+	<!-- main content -->
+	<div class="container">
+		<div class="column-wrapper" ng-repeat="column in board.columns">
+      		<div class="column-title">{{ column.name }}</div>
+      		<div ui-multi-sortable ng-model="board" model-subset="columns[{{ $index }}].items" class="column">
+        		<div class="item" ng-repeat="item in column.items">{{ item.name }}</div>
+      		</div>
+    	</div>
+    	<div style="clear: both"></div>
+	</div> <!-- div container/DashboardController -->
+
+	<script type="text/javascript">
+      	(function()
+      	{
+        	angular.module( 'ui.sortable').value('uiSortableConfig', 
+        	{
+          		sortable: { connectWith: '.column', update: 'itemsChanged', }
+        	});
+
+        	this.taskboard = angular.module( 'taskboard', ['ui.sortable'] );
+
+        	this.TaskController = function($scope) 
+        	{
+          		$scope.changed = 'Unfortunately not';
+
+          		$scope.board = 
+          		{
+            		columns: 
+            		[
+              			{ 	name: 'todo',
+                			items: [
+                  			{name: 'todo 1'},
+                  			{name: 'todo 2'},
+                  			{name: 'todo 3'},
+                  			{name: 'todo 4'}
+                			]
+              			},
+              			{ 
+              				name: 'done',
+                			items: [
+                  				{name: 'done 1'},
+                 				{name: 'done 2'}
+                			]
+              			},
+              			{ 
+              				name: 'onhold',
+                			items: []
+              			}
+            		]
+          		};
+
+          		$scope.itemsChanged = function() 
+          		{
+            		$scope.changed = 'Yes, of course :)';
+          		}
+        	};
+
+      	}).call(this);
+    </script>
+
+	<footer class="container"></footer>
+</body>
+</html>

@@ -1,10 +1,14 @@
 # Django settings for epstein project.
+import os
+import os.path
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+_PATH = os.path.abspath( os.path.dirname(__file__) )
+
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ( 'epstein_admin', 'admin@epstein.com'),
 )
 
 MANAGERS = ADMINS
@@ -62,13 +66,16 @@ MEDIA_URL = ''
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 STATIC_ROOT = ''
+#STATIC_ROOT = os.path.join( _PATH, 'static/root/' )
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
+STATIC_URL = os.path.join( _PATH, 'static/' )
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    os.path.join( _PATH, 'static/' ),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -123,6 +130,7 @@ INSTALLED_APPS = (
     'apps.login',
     'apps.events',
     'apps.setlists',
+    'apps.home',
 
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -131,9 +139,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.admindocs',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -164,3 +172,9 @@ LOGGING = {
         },
     }
 }
+
+TEMPLATE_CONTEXT_PROCESSOR = (
+    'django.contrib.auto.context_processors.auth',
+)
+LOGIN_REDIRECT_URL = '/dashboard'
+LOGIN_URL = '/user/'

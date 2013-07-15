@@ -1,17 +1,33 @@
 from django.conf.urls import patterns, include, url
-
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'epstein.views.home', name='home'),
-    # url(r'^epstein/', include('epstein.foo.urls')),
+  
+    # homepage routes
+    url( r'^$', 			'apps.home.views.index',  name='home' ),
+    url( r'^home/$', 		'apps.home.views.home',   name='home' ),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    #users routes
+    url( r'^users/$', 	 	'apps.users.views.index', 	name='home' ),
+    url( r'^users/new$', 	'apps.users.views.new', 	name='home' ),
+    url( r'^users/login$', 	'apps.users.views.login', 	name='home' ),
 
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    #bands routes
+    url( r'^dashboard/$', 	 'apps.users.views.dashboard', 	name='bands' ),
+
+
+    #login routes
+    url( r'^users/$', 		'apps.login.urls',  name='home' ),
+
+    # basically hacks for now... need to clean up
+    url( r'^about/$', 		'apps.users.views.about',  name='home' ),
+    url( r'^bands/$', 		'apps.users.views.bands',  name='home' ),
+    url( r'^events/$', 		'apps.users.views.events',  name='home' ),
+    url( r'^setlist/$', 	'apps.users.views.setlist',  name='home' ),
+
+    # admin routes
+    #url( r'^admin/doc/', include('django.contrib.admindocs.urls') ),
+    #url( r'^admin/', 	include(admin.site.urls) ),
 )
