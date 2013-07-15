@@ -26,7 +26,7 @@ def create(request):
     password = request.POST.get( 'last_name', '' )
     password_confirm = request.POST.get( 'password_confirm', '' )
     #user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
-    my_data = {}
+    my_data = { "first":first_name, "last":last_name }
     return render_to_response( 'users/index.html', my_data, context_instance=RequestContext(request) )
 
 def do_login(request):
@@ -46,4 +46,4 @@ def setlist(request):
     return render_to_response( 'setlist.html', context_instance=RequestContext(request) )
 
 def dashboard(request):
-    return render_to_response( 'users/dashboard.html', context_instance=RequestContext(request) )
+    return render_to_response( 'users/dashboard2.html', context_instance=RequestContext(request) )

@@ -1,8 +1,9 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h1>Register for the AMAZING website!</h1>
-<form action="/users/new" method="post">{% csrf_token %}
+
+<div class="container">
+<h2>Create Epstein account</h2>
+<form action="/users/create" method="post">{% csrf_token %}
 	<input type="text" name="first_name" placeholder="First name"/><br/>
 	<input type="text" name="last_name" placeholder="Last name"/><br/>
 	<input type="text" name="email_addr" placeholder="Email address"/><br/>
@@ -10,4 +11,5 @@
 	<input type="password" name="password_confirm" placeholder="Confirm password"/><br/>
 	<input type="submit" value="submit" class="btn"/>
 </form>
+</div>
 {% endblock %}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+	.breadcrumb { padding: 0px;  border-radius: 0px;  }
+</style>	
+
+<!-- Main Content -->
+<div class="container" ng-controller="DashboardController">
+	<ul class="breadcrumb">
+			<li><a href="#">audioarchitect</a> <span class="divider">/</span></li>
+			<li><a href="#">bang on</a> <span class="divider">/</span></li>
+			<li class="active">dashboard</li>
+	</ul>
+	<div class="row">
+		<div class="span3">
+			<fieldset>
+			<legend>Bands</legend>
+
+			<ul class='nav nav-pills nav-stacked'>
+				<li ng-repeat="band in bands" class='dropdown'>
+					<a class="dropdown-toggle" data-toggle='dropdown' href="#">{{band}} <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Profile</a></li>
+						<li><a href="#">Events</a></li>
+					</ul>
+				</li>
+			</ul>
+			<a class='btn' href="#">Manage Bands</a>
+			</fieldset>
+			</br>
+
+			<fieldset>
+			<legend>Connections</legend>
+
+			<ul class='nav nav-pills nav-stacked'>
+				<li ng-repeat="band in bands" class='dropdown'>
+					<a class="dropdown-toggle" data-toggle='dropdown' href="#">{{band}} <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Profile</a></li>
+						<li><a href="#">Calendar</a></li>
+					</ul>
+				</li>
+			</ul>
+			</fieldset>
+		</div>
+		<div class="span6">
+			<fieldset>
+			<legend>News Feed</legend>
+
+			<table class="table table-striped">
+				<tr ng-repeat="item in news">
+					<td>{{item.message}}</td>
+				</tr>
+			</table>
+			</fieldset>
+		</div>
+		<div class="span3">
+			<fieldset>
+			<legend>Calendar</legend>
+
+			<div id='calendar'></div>
+			</fieldset>
+			<br>
+			<fieldset>
+			<legend>Upcoming Events</legend>
+			<table class="table table-striped">
+				<tr ng-repeat="event in events">
+					<td>{{event.message}}</td>
+				</tr>
+			</table>
+
+			<button blass="btn">New Event</button>
+			</fieldset>
+		</div>
+	</div>
+</div> <!-- div container/DashboardController -->
+{% endblock %}
+
+
