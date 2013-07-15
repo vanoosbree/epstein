@@ -7,5 +7,9 @@ class registration_form(UserCreationForm):
 	last_name  = forms.CharField( max_length=200, label='Last Name' )
 	email = forms.CharField( max_length=250, label='Email', validators=[validate_email] )
 
-	def save(self, *args, **hwargs):
-		user = super(registration_form, self).save()
+	def save(self, *args, **kwargs):
+		user = super( registration_form, self ).save()
+		user.email = self.cleaned_data["email"]
+		user.first_name = self.cleaned_data["first_name"]
+		user.last_name = self.cleaned_data["last_name"]
+		user.save()

@@ -15,7 +15,9 @@ urlpatterns = patterns('',
     #users routes
     url( r'^users/$', 	 	'apps.users.views.index', 	name='home' ),
     url( r'^users/new$', 	'apps.users.views.new', 	name='home' ),
-    url( r'^users/login$', 	'apps.users.views.login', 	name='home' ),
+    url( r'^users/create$', 'apps.users.views.create',     name='home' ),
+    url( r'^users/login$', 	'apps.users.views.do_login', 	name='home' ),
+    url( r'^users/logout$', 'apps.users.views.do_logout',    name='home' ),
     url( r'^dashboard/$',   'apps.users.views.dashboard',   name='bands' ),
 
     #bands routes
@@ -27,11 +29,9 @@ urlpatterns = patterns('',
     # setlist routes
     url( r'^setlist/$',     'apps.setlists.views.setlist',  name='setlist' ),
 
-    # do da login
-    #url( r'^user/$',       include( 'apps.login.urls'),  name='user login/registration' ),
-    url( r'^register$',     'apps.login.views.register', name='user register' ),
+
     #login routes
-    url( r'^users/$', 		'apps.login.urls',  name='home' ),
+    #url( r'^users/$', 		'apps.login.urls',  name='home' ),
 
     # basically hacks for now... need to clean up
     url( r'^about/$', 		'apps.users.views.about',  name='home' ),

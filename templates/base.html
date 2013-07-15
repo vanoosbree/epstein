@@ -2,20 +2,18 @@
 <html lang="en">
 <head>
     {% load staticfiles %}
-    <!-- <link rel="stylesheet" href="{% "static bootstrap.css" }%"> -->
+   
     <link rel="stylesheet" href="{{STATIC_URL}}css/bootstrap.css">
     <!-- <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css"> -->
-    <!-- // <script src="{{STATIC_URL}}js/bootstrap.min.js"></script> -->
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/bootswatch.css">
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/smoothness/jquery-ui-1.10.3.custom.min.css">
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/timepicker/jquery.timepicker.css">
-    
-
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}css/timepicker/jquery.timepicker.js"></script>
+    <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
 
-    <title>{% block title %}Epstein!{% endblock %}</title>
+    <title>{% block title %}Epstein{% endblock %}</title>
 </head>
 <body>
     {% block navigation %}
@@ -28,19 +26,18 @@
     
             </ul>
             <ul class="nav pull-right">
-                <li><a href="/logout">Log Out</a></li>
-            </ul>
-        </div>
-    </div>
-    <!-- <div class="navbar">
-        <div class="navbar-inner">
-            <a class="brand" href="#">Epstein</a>
-            <ul class="nav">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Register</a></li>
-                <li><a href="#">Do Something</a></li>
-            </ul>
-            <ul class="nav pull-right">
+
+                {% if user.is_authenticated %}
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown"href="#">
+                        {{user.email}} <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                          <li><a href="users/logout">Log Out</a></li>
+                          <li><a href="#">Edit Profile</a></li>
+                    </ul>
+                </li>
+                {% else %}
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown"href="#">
                         Login<b class="caret"></b>
@@ -53,9 +50,10 @@
                         </form>
                     </ul>
                 </li>
+                {% endif %}
             </ul>
         </div>
-    </div> -->
+    </div>
     {% endblock %}
     
     <div id="content">
@@ -63,7 +61,7 @@
     </div>
 
     {% block footer %}
-    <footer class="container">Footer placeholder</footer>
+   <!--  <footer class="container">Footer placeholder</footer> -->
     {% endblock %}
 </body>
 </html>

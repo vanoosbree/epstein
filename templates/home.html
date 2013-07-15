@@ -10,7 +10,7 @@
 
 	<div id="login" class="span4 pull-left">
 		<h3>Login</h3>
-		<form action="bands/" method="post">
+		<form action="/users/login" method="post">
 			{% csrf_token %}
 			<input type="text" name="login_email" placeholder="Email" value="" />
 			<br />
@@ -22,7 +22,7 @@
 
 	<div id="register" class="span4 pull-left">
 		<h3>Register</h3>
-		<form action="bands/" method="post">
+		<form action="/users/create" method="post">
 			{% csrf_token %}
 			<input type="text" name="name" placeholder="Your Name" value="" />
 			<input type="text" name="email" placeholder="Email" value=""/><br />
