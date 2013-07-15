@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+	<div class="hero-unit">
+		<h1><em>Epstein</em> manages your band</h1>
+	</div>
+
+	<!-- spacer div -->
+	<div class="span2"></div> 
+
+	<div id="login" class="span4 pull-left">
+		<h3>Login</h3>
+		<form action="bands/" method="post">
+			{% csrf_token %}
+			<input type="text" name="login_email" placeholder="Email" value="" />
+			<br />
+			<input type="password" name="login_password" placeholder="Password" value="" /><br />
+			<input type="submit" class="btn btn-inverse" value="Login" />
+		</form>
+<!-- display login errors -->
+	</div>
+
+	<div id="register" class="span4 pull-left">
+		<h3>Register</h3>
+		<form action="bands/" method="post">
+			{% csrf_token %}
+			<input type="text" name="name" placeholder="Your Name" value="" />
+			<input type="text" name="email" placeholder="Email" value=""/><br />
+			<input type="password" name="password" placeholder="Password" /><br />
+			<input type="password" name="confirm_password" placeholder="Confirm Password" /><br />
+			<input type="submit" class="btn btn-inverse" value="Register" />
+		</form>
+<!-- display register errors -->
+	</div>
+</div>
+
+{% endblock %}

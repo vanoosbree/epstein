@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+	<div class="span5 pull-left">
+		<!-- singular or plural -->
+		<h3>Your band</h3>	
+		<ul>
+			<li><a href="/dashboard">Attack of the Raging Kumquat</a></li>
+			<li><a href="/dashboard">Seamen Vaccuums</a></li>
+		</ul>
+
+		<h4>Create a new band</h4>
+		<form action="/bands/" method="post">
+			{% csrf_token %}
+			<input type="text" name="band_name" placeholder="Band Name" /><br />
+			<input type="submit" class="btn btn-inverse" value="Create" />
+		</form>
+	</div>
+
+	<div class="span5 pull-left">
+		<h3>Join an existing band</h3>
+
+			<li><a href="/dashboard">Sweetie Bird</a></li>
+			<li><a href="/dashboard">Cool Mountain Boys</a></li>
+			<li><a href="/dashboard">Singin' 'n' Swingin'</a></li>
+			<li><a href="/dashboard">Cheeseball and Socket Joint</a></li>
+		</ul>
+	</div>
+</div>
+
+{% endblock %}
