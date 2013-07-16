@@ -21,17 +21,13 @@ urlpatterns = patterns('',
 
     #bands routes
     url( r'^bands/$',       'apps.bands.views.show_bands',  name='show_bands' ),
+    url( r'^band/$',        'apps.bands.views.dashboard',  name='show_bands' ),
    
     # event routes
     url( r'^events/$',      'apps.events.views.events',  name='home' ),
 
     # setlist routes
     url( r'^setlist/$',     'apps.setlists.views.setlist',  name='setlist' ),
-
-
-    #login routes
-    #url( r'^users/$', 		'apps.login.urls',  name='home' ),
-    #url( r'^logout$',       'apps.home.views.index',  name='logout' ),
 
     # basically hacks for now... need to clean up
     url( r'^about/$', 		'apps.users.views.about',  name='home' ),

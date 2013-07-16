@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#datepicker").datepicker();
+		$("#timepicker").timepicker({ 'scrollDefaultNow': true });
+	});
+</script>
+
+<div class="container">	
+	<ul class="breadcrumb">
+		<li><a href="#">{{band}}</a> <span class="divider">/</span></li>
+		<li class="active">dashboard</span></li>
+	</ul>
+	
+	<div class="row">
+		<div class="span2">
+			<fieldset>
+			<legend>Tools</legend>
+			<ul class='nav nav-pills nav-stacked'>	
+				<li><a href="#">Manage Songs</a></li>
+				<li><a href="#">Manage Ninjas</a></li>
+			</ul>
+			<a class='btn' href="#">Manage Bands</a>
+			</fieldset>
+			</br>
+		</div>
+		<div class="span7">
+			<fieldset>
+			<legend>Events</legend>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Date &amp; Time</th>
+							<th>Description</th>
+							<th>Address</th>
+							<th>Setlist</th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>Monday August 8th, 2013</td>
+						<td>The Warfield</td>
+						<td>12345 Market St, San Francisco, CA</td>
+						<td><a href='/setlist'>view</a></td>
+					</tr>
+
+					{% for event in events %}
+					<tr>
+						<td>{{event.date}} at {{event.time}}</td>
+						<td>{{event.description}}</td>
+						<td>{{event.address}}</td>
+						<td><a href='/setlist/index/". $show->id ."'>view</a></td>
+					</tr>";
+					{% endfor %}
+					</tbody>
+				</table>
+
+				<h4>Add an event</h4>
+				<form action="shows/create" method="post">
+					{% csrf_token %}
+					<input type="text" id="datepicker" name="date" placeholder="Date" />
+					<input type="text" id="timepicker" name="time" placeholder="Time" />
+					<input type="text" name="description" placeholder="Description" />
+					<input type="text" name="address" placeholder="Address" /><br />
+					<input type="submit" class="btn btn-inverse" value="Add Event" />
+				</form>
+			</fieldset>
+		</div>
+		<div class="span3">
+			<fieldset>
+			<legend>Calendar</legend>
+
+			<div id='calendar'></div>
+			</fieldset>
+		</div>
+	</div>
+</div> <!-- div container/DashboardController -->
+
+{% endblock %}

@@ -10,14 +10,13 @@
 
 <div class="container">
 	<ul class="breadcrumb">
-  			<li><a href="#">audioarchitect</a> <span class="divider">/</span></li>
-  			<li><a href="#">Dashboard</a> <span class="divider">/</span></li>
-  			<li><a href="#">Bang On</a> <span class="divider">/</span></li>
+  			<!-- <li><a href="#">{{user.email}}</a> <span class="divider">/</span></li> -->
+  			<li><a href="#">{{band}}</a> <span class="divider">/</span></li>
   			<li class="active">Events</li>
 		</ul>
-	<h1 class="text-center">Seamen Vaccum</h1>
+	<h1 class="text-center">{{band}}</h1>
 	<h3>Add a show</h3>
-	<form action="#" method="post">
+	<form action="shows/create" method="post">
 		{% csrf_token %}
 		<input type="text" id="datepicker" name="date" placeholder="Date" />
 		<input type="text" id="timepicker" name="time" placeholder="Time" />
@@ -43,15 +42,14 @@
 			<td><a href='/setlist'>view</a></td>
 		</tr>
 
-		<!-- foreach ($shows as $show)
-		{
-			echo "<tr>
-					<td>". date('M jS, Y', strtotime($show->date)) ." at ". date('g:i A', strtotime($show->time)) . "</td>
-					<td>". $show->description ."</td>
-					<td>". $show->address ."</td>
-					<td><a href='/setlist/index/". $show->id ."'>view</a></td>
-				</tr>";
-		} -->
+		{% for event in events %}
+		<tr>
+			<td>{{event.date}} at {{event.time}}</td>
+			<td>{{event.description}}</td>
+			<td>{{event.address}}</td>
+			<td><a href='/setlist/index/". $show->id ."'>view</a></td>
+		</tr>";
+		{% endfor %}
 	
 		</tbody>
 	</table>
