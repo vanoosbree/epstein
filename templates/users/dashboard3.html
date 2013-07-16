@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Epstein - Dashboard</title>
+	<link rel="stylesheet" href="css/bootstrap.css"/>
+	<link rel="stylesheet" href="css/bic_calendar.css"/>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>	
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>	
+	<script src="js/bic_calendar.min.js" type="text/javascript"></script>	
+	<script type="text/javascript" src="js/angular.min.js" ></script>
+	<script type="text/javascript" src="js/app.js" ></script>
+	<script type="text/javascript">
+		$(document).ready( function()
+		{
+			mesos = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+			dias = ["S", "M", "T", "W", "T", "F", "S"];
+
+			$('#calendar').bic_calendar(
+			{
+    			nombresMes: mesos,
+    			dias: dias,
+    			req_ajax: { type: 'get', url: 'data.php' }
+			});
+		});
+	</script>
+
+	<style>
+		.breadcrumb { padding: 0px;  border-radius: 0px;  }
+	</style>
+
+</head>
+<body ng-app="">
+	<!-- Main Content -->
+	{% block content %}
+	<div class="container" ng-controller="DashboardController">
+		
+		<ul class="breadcrumb">
+  			<li><a href="#">audioarchitect</a> <span class="divider">/</span></li>
+  			<li><a href="#">Dashboard</a> <span class="divider">/</span></li>
+  			<li class="active">Bang On/</span></li>
+		</ul>
+		
+		<div class="row">
+			<div class="span3">
+				<fieldset>
+				<legend>Bands</legend>
+
+				<ul class='nav nav-pills nav-stacked'>
+					<li ng-repeat="band in bands" class='dropdown'>
+						<a class="dropdown-toggle" data-toggle='dropdown' href="#">{{band}} <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Profile</a></li>
+							<li><a href="#">Events</a></li>
+						</ul>
+					</li>
+				</ul>
+				<a class='btn' href="#">Manage Bands</a>
+				</fieldset>
+				</br>
+
+				<fieldset>
+				<legend>Connections</legend>
+
+				<ul class='nav nav-pills nav-stacked'>
+					<li ng-repeat="band in bands" class='dropdown'>
+						<a class="dropdown-toggle" data-toggle='dropdown' href="#">{{band}} <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Profile</a></li>
+							<li><a href="#">Calendar</a></li>
+						</ul>
+					</li>
+				</ul>
+
+				</fieldset>
+			</div>
+			<div class="span6">
+				<fieldset>
+				<legend>News Feed</legend>
+
+				<table class="table table-striped">
+					<tr ng-repeat="item in news">
+						<td>{{item.message}}</td>
+					</tr>
+				</table>
+				</fieldset>
+			</div>
+			<div class="span3">
+				<fieldset>
+				<legend>Calendar</legend>
+
+				<div id='calendar'></div>
+				</fieldset>
+				<br>
+				<fieldset>
+				<legend>Upcoming Events</legend>
+				<table class="table table-striped">
+					<tr ng-repeat="event in events">
+						<td>{{event.message}}</td>
+					</tr>
+				</table>
+
+				<button blass="btn">New Event</button>
+				</fieldset>
+			</div>
+		</div>
+	</div> <!-- div container/DashboardController -->
+{% endblock %}
+	<footer class="container">
+		Placeholder for footer
+	</footer>
+</body>
+</html>

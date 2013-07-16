@@ -6,6 +6,9 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
+from apps.bands.models import Band
+from apps.events.models import Event 
+
 def index(request):
     my_data = {}
     return render_to_response( 'users/index.html', my_data, context_instance=RequestContext(request) )
@@ -45,6 +48,14 @@ def create(request):
     my_data = { "user" : user }
     return render_to_response( 'users/index.html', my_data, context_instance=RequestContext(request) )
 
+def dashboard(request):
+    user_id = request.user.id
+    bands = Band.objects.all()
+    news = [ { 'user' : 'John', 'msg' : "The drummer died...no big loss" }, {'user' : 'Bob', 'msg' : "Can't make it to practice!" } ]
+    events = [ { 'date' : 'Aug 30th', 'msg' : "Band Practice" }, {'date' : 'Sep 1st', 'msg' : "Show at Warfield!" } ]
+    view_data = { "bands" : bands, "news" : news, "events" : events }
+
+    return render_to_response( 'users/dashboard.html', view_data, context_instance=RequestContext(request) )
 
 def about(request):
     return render_to_response( 'about.html', context_instance=RequestContext(request) )

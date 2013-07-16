@@ -6,13 +6,13 @@
  * Contains the Angular controllers for the views
  **************************************************/
 
-var myapp = angular.module( 'myapp', ['ui'] );
+// var myapp = angular.module( 'myapp', ['ui'] );
 
-myapp.controller( 'controller', function ($scope) 
-{
-    $scope.list = ["one", "two", "three", "four", "five", "six"];
-});
-angular.bootstrap( document, ['myapp'] );
+// myapp.controller( 'controller', function ($scope) 
+// {
+//     $scope.list = ["one", "two", "three", "four", "five", "six"];
+// });
+// angular.bootstrap( document, ['myapp'] );
 
 
 function FirstControl($scope)
@@ -33,10 +33,9 @@ function FirstControl($scope)
 	};
 };
 
-
 function DashboardController($scope)
 {
-	$scope.bands 	= [ "Bang On", "Rage of the Kumquat" ];
+	$scope.bands 	= [ { name: "Bang On"}, { name: "Rage of the Kumquat"}, { name: "Coding Dojo" }];
 	$scope.news  	= [ { date: 'July 4th', message: "Got to do the thing!"}, { date: 'July 6th', message: "Got to do the other thing!"} ];
 	$scope.events  	= [ { date: 'July 4th', message: "Got to do the thing!"}, { date: 'July 6th', message: "Got to do the other thing!"} ];
 

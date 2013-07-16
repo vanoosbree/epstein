@@ -10,7 +10,6 @@ urlpatterns = patterns('',
   
     # homepage routes
     url( r'^$', 			'apps.home.views.index',  name='home' ),
-    url( r'^logout$',       'apps.home.views.index',  name='logout' ),
 
     #users routes
     url( r'^users/$', 	 	'apps.users.views.index', 	name='home' ),
@@ -32,6 +31,7 @@ urlpatterns = patterns('',
 
     #login routes
     #url( r'^users/$', 		'apps.login.urls',  name='home' ),
+    #url( r'^logout$',       'apps.home.views.index',  name='logout' ),
 
     # basically hacks for now... need to clean up
     url( r'^about/$', 		'apps.users.views.about',  name='home' ),
