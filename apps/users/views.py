@@ -6,7 +6,7 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
-from apps.bands.models import Band
+from apps.bands.models import Band, UserHasBand
 from apps.events.models import Event 
 
 def index(request):
@@ -22,7 +22,8 @@ def do_login(request):
     if user is not None:
         if user.is_active:
             login(request,user)
-            return render_to_response( "users/dashboard.html", context_instance=RequestContext(request) )
+            #return render_to_response( "users/dashboard.html", context_instance=RequestContext(request) )
+            HttpResponseRedirect('dashboard')
         else:
             return render_to_response( "home.html", {'errors': "Account has been disabled!"}, context_instance=RequestContext(request) )
     else:
@@ -49,16 +50,17 @@ def create(request):
     return render_to_response( 'users/index.html', my_data, context_instance=RequestContext(request) )
 
 def dashboard(request):
-    user_id = request.user.id
-    bands = Band.objects.all()
+    userid = request.user.id
+    pookies = UserHasBand.objects.filter(user_id = userid)
+    bands = []
+
+    for pook in pookies:
+        bands.append( Band.objects.get(pk=pook.band_id) )
+
     news = [ { 'user' : 'John', 'msg' : "The drummer died...no big loss" }, {'user' : 'Bob', 'msg' : "Can't make it to practice!" } ]
     events = [ { 'date' : 'Aug 30th', 'msg' : "Band Practice" }, {'date' : 'Sep 1st', 'msg' : "Show at Warfield!" } ]
     view_data = { "bands" : bands, "news" : news, "events" : events }
-
     return render_to_response( 'users/dashboard.html', view_data, context_instance=RequestContext(request) )
-
-def about(request):
-    return render_to_response( 'about.html', context_instance=RequestContext(request) )
 
 # def bands(request):
 #     return render_to_response( 'bands.html', context_instance=RequestContext(request) )

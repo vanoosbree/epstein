@@ -18,4 +18,20 @@ ul {
 	margin-left: : 35px;
 }
 
-.breadcrumb { padding: 0px;  border-radius: 0px;  }
+.breadcrumb { padding: 0px; margin: 0px;  border-radius: 0px;  }
+
+
+.row-fluid{
+	margin-bottom: 10px;
+}
+
+ul {
+	margin-left: 0px;
+}
+ul li{
+	padding-left: 0px; margin-left: 0px;
+}
+
+h2, h3, h4{
+	margin-bottom: 5px;
+}

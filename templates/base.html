@@ -53,8 +53,8 @@
                         {{user.email}} <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                          <li><a href="users/logout">Log Out</a></li>
-                          <li><a href="#">Edit Profile</a></li>
+                          <li><a href="/users/logout">Log Out</a></li>
+                          <li><a href="/users/profile">Edit Profile</a></li>
                     </ul>
                 </li>
                 {% else %}
@@ -63,7 +63,7 @@
                         Login<b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <form>
+                        <form action="/users/login" method="post">
                             <input type="text" placeholder="email address"/>
                             <input type="password" placeholder="password"/>
                             <input type="submit" class="btn"/>

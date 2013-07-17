@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#datepicker").datepicker();
+		$("#timepicker").timepicker({ 'scrollDefaultNow': true });
+	});
+</script>
+
+<div class="container">
+	<ul class="breadcrumb">
+  			<li><a href="/dashboard">Home</a> <span class="divider">/</span></li>
+  			<li><a href="#">{{band}}</a> <span class="divider">/</span></li>
+  			<li class="active"><a href="/bands/4/">Events</a><span class="divider">/</span></li>
+  			<li class="active">Gig at that Place</li>
+		</ul>
+	
+	<div class="container" ng-controller="FirstControl">
+		<h3>Gig at that Place - May 30th, 2013</h3>
+		<div class="row">
+			<div class="span8">
+				<fieldset>
+				<legend>Logistics</legend>
+				<div class="row">
+					<div class="span5">
+						<p>12345 Main Street</p>
+						<p>San Francisco, CA</p>
+						<p>Bill Jones - (415)555-1234</p>
+					</div>
+
+					<div class="span3">
+						<iframe width="225" height="175" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps?sll=37.41331034459982,-122.08126700000004&amp;sspn=0.19308543669385833,0.3444206349401875&amp;t=m&amp;q=464+Fairchild+Drive,+Mountain+View,+CA&amp;dg=opt&amp;ie=UTF8&amp;hq=&amp;hnear=464+Fairchild+Dr,+Mountain+View,+California+94043&amp;z=14&amp;ll=37.403503,-122.051919&amp;output=embed"></iframe><br /><small><a href="https://www.google.com/maps?sll=37.41331034459982,-122.08126700000004&amp;sspn=0.19308543669385833,0.3444206349401875&amp;t=m&amp;q=464+Fairchild+Drive,+Mountain+View,+CA&amp;dg=opt&amp;ie=UTF8&amp;hq=&amp;hnear=464+Fairchild+Dr,+Mountain+View,+California+94043&amp;z=14&amp;ll=37.403503,-122.051919&amp;source=embed" style="color:#0000FF;text-align:left">View Larger Map</a></small>
+					</div>
+				</div> <!-- end div row -->
+				</fieldset>
+			</div>
+			<div class="span4">
+				<fieldset>
+					<legend>Agenda</legend>
+					<ul>
+						<li>Something</li>
+						<li>Something else</li>
+						<li>Blah blah</li>
+					</ul>
+					<form>
+						<input type="text" placeholder="new item"><br/>
+					</form>
+			
+					<a class="btn btn-inverse" href='/setlist'>View/Edit Set List</a>
+				</fieldset>
+			</div> <!-- div span7 -->
+		</div>
+		
+		<div class='row'>
+			<fieldset>
+				<legend>Communication Wall</legend>
+				<table class="table table-striped">
+					<tr ng-repeat="msg in messages">
+						<td>{{msg.user}}</td>
+						<td>{{msg.message}}</td>
+					</tr>
+				</table>
+
+				<form ng-submit="addMessage()">
+					<input type="text" placeholder="new message" class="span6" ng-model="newMsg"/>
+				</form>
+			</fieldset>
+		</div>
+	</div> <!-- div row -->	
+</div>
+
+{% endblock %}

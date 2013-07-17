@@ -14,41 +14,34 @@
 			<legend>Bands</legend>
 
 			<ul class='nav nav-pills nav-stacked'>
+				{% if bands.length == 0 %}
+				<p>You don't have any bands!</p>
+				{% endif %}
 				{% for band in bands %}
 				<li class='dropdown'>
-					<a class="dropdown-toggle" data-toggle='dropdown' href="#">{{band.name}}<b class="caret"></b></a>
+					<a class="dropdown-toggle" data-toggle='dropdown' href="#">{{band.name}} <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="#">Profile</a></li>
 						<li><a href="#">Events</a></li>
+						<li><a href="/bands/{{band.id}}/leave">Leave Band</a></li>
 					</ul>
 				</li>
 				{% endfor %}
 			</ul>
-			<a class='btn' href="#">Manage Bands</a>
+			<form action="/bands/create" method="post">
+				{% csrf_token %}
+				<input type="text" name="band_name" placeholder="new band" />	
+				<input type="submit" class="btn btn-inverse" value="New Band" />
+			</form>
+			<a href="#" class="btn btn-inverse">Join Band</a>
 			</fieldset>
 			</br>
-
-			<!-- <fieldset>
-			<legend>Connections</legend>
-			<ul class='nav nav-pills nav-stacked'>
-				<li ng-repeat="band in bands" class='dropdown'>
-					<a class="dropdown-toggle" data-toggle='dropdown' href="#">{{band}} <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">Profile</a></li>
-						<li><a href="#">Calendar</a></li>
-					</ul>
-				</li>
-			</ul>
-			</fieldset> -->
 		</div>
 		<div class="span6">
 			<fieldset>
 			<legend>News Feed</legend>
 
 			<table class="table table-striped">
-				<!-- <tr ng-repeat="item in news">
-					<td>{{item.message}}</td>
-				</tr> -->
 				{% for item in news %}
 				<tr><td>{{item.user}}: {{item.msg}}</td></tr>
 				{% endfor %}
@@ -68,12 +61,9 @@
 				{% for event in events %}
 				<tr><td><a href="#">{{event.msg}}</a></td></tr>
 				{% endfor %}
-				<!-- <tr ng-repeat="event in events">
-					<td>{{event.message}}</td>
-				</tr> -->
 			</table>
 
-			<button blass="btn">New Event</button>
+			<button class="btn btn-inverse">New Event</button>
 			</fieldset>
 		</div>
 	</div>
