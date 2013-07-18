@@ -3,29 +3,39 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#datepicker").datepicker();
+		$("#datepicker").datepicker( { dateFormat: 'yy-mm-dd' } );
 		$("#timepicker").timepicker({ 'scrollDefaultNow': true });
 	});
 </script>
 
 <div class="container">	
 	<ul class="breadcrumb">
-		<li><a href="#">{{band}}</a> <span class="divider">/</span></li>
+		<li><a href="#">{{band.name}}</a> <span class="divider">/</span></li>
 		<li class="active">dashboard</span></li>
 	</ul>
 	
 	<div class="row">
-		<div class="span2">
+		<div class="span3">
+			<fieldset>
+				<legend>Add Event</legend>
+				<form id="add-event" action="/bands/{{band.id}}/events/create/" method="post">
+					{% csrf_token %}
+					<input type="text" id="datepicker" name="date" placeholder="Date" />
+					<input type="text" id="timepicker" name="time" placeholder="Time" /><br/>
+					<input type="text" id="event-desc" name="description" placeholder="Description" /><br/>
+					<input type="text" id="event-addr" name="address" placeholder="Address" /><br />
+					<input type="submit" class="btn btn-inverse" value="Add Event" />
+				</form>
+			</fieldset>
+			
+
 			<fieldset>
 			<legend>Tools</legend>
-			<ul class='nav nav-pills nav-stacked'>	
-				<li><a href="#">Manage Songs</a></li>
-				<li><a href="#">Manage Ninjas</a></li>
-			</ul>
-			
-			<a class='btn' href="#">Manage Bands</a>
+				<ul class='nav nav-stacked'>	
+					<li><a href="/bands/{{band.id}}/songs/">Manage Songs</a></li>
+					<li><a href="/bands/{{band.id}}/profile/">Edit Profile</a></li>
+				</ul>
 			</fieldset>
-			</br>
 		</div>
 		<div class="span7">
 			<fieldset>
@@ -40,36 +50,19 @@
 						</tr>
 					</thead>
 					<tbody>
-					<tr>
-						<td>Monday August 8th, 2013</td>
-						<td>The Warfield</td>
-						<td>12345 Market St, San Francisco, CA</td>
-						<td><a href='/setlist'>view</a></td>
-					</tr>
-
 					{% for event in events %}
 					<tr>
-						<td>{{event.date}} at {{event.time}}</td>
+						<td>{{event.date}}<br/>{{event.time}}</td>
 						<td>{{event.description}}</td>
 						<td>{{event.address}}</td>
-						<td><a href='/setlist/index/". $show->id ."'>view</a></td>
-					</tr>";
+						<td><a href='/bands/{{band.id}}/events/{{event.id}}/setlist'>view</a></td>
+					</tr>
 					{% endfor %}
 					</tbody>
 				</table>
-
-				<h4>Add an event</h4>
-				<form action="shows/create" method="post">
-					{% csrf_token %}
-					<input type="text" id="datepicker" name="date" placeholder="Date" />
-					<input type="text" id="timepicker" name="time" placeholder="Time" />
-					<input type="text" name="description" placeholder="Description" />
-					<input type="text" name="address" placeholder="Address" /><br />
-					<input type="submit" class="btn btn-inverse" value="Add Event" />
-				</form>
 			</fieldset>
 		</div>
-		<div class="span3">
+		<div class="span2">
 			<fieldset>
 			<legend>Calendar</legend>
 

@@ -2,25 +2,41 @@
 <html lang="en">
 <head>
     {% load staticfiles %}
-   
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{STATIC_URL}}css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/bootswatch.css"/>
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/smoothness/jquery-ui-1.10.3.custom.min.css"/>
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/timepicker/jquery.timepicker.css"/>
-    <link rel="stylesheet" href="{{STATIC_URL}}css/bic_calendar.css"/>
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css"/>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.jss"></script>
+    <link rel="stylesheet" href="{{STATIC_URL}}css/bic_calendar.css"/>
+    <script src="{{STATIC_URL}}js/jquery-1.9.1.min.js"></script> 
+    <script src="{{STATIC_URL}}js/jquery-ui.js"></script> 
     <script src="{{STATIC_URL}}css/timepicker/jquery.timepicker.js"></script>
     <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
     <script src="{{STATIC_URL}}js/bic_calendar.min.js"></script>   
-    <script src="{{STATIC_URL}}js/angular.min.js" ></script>
-    <script src="{{STATIC_URL}}js/app.js" ></script>
-
+   
     <script type="text/javascript">
         $(document).ready( function()
         {
+            function csrfSafeMethod(method) {
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie != '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+           
+
             mesos = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             dias = ["S", "M", "T", "W", "T", "F", "S"];
 
@@ -30,6 +46,56 @@
                 dias: dias,
                 req_ajax: { type: 'get', url: 'data.php' }
             });
+        
+            //lists in setlists/setlist.html
+
+
+            $( "#sortable1, #sortable2" ).sortable({
+                connectWith: ".connectedSortable" 
+            });
+
+            $( "#sortable2" ).sortable({
+                //connectWith: ".connectedSortable",
+                update : function () 
+                { 
+                    var bandId = $('#sortable2').attr( 'band-id' );
+                    var eventId = $('#sortable2').attr( 'event-id' );
+                    var csrftoken = getCookie('csrftoken');
+
+                    var order1 = $('#sortable1').sortable('toArray').toString();
+                    var order2 = $('#sortable2').sortable('toArray').toString();
+
+                    //console.log( "Order 1: " + order1 ); 
+                    //console.log( "Order 2: " + order2 ); 
+
+                    //console.log( "\nBand: " + bandId + " Event: " + eventId );
+                    $.ajax( {
+                        type: "POST",
+                        remote: true,
+                        crossDomain: false,
+                        beforeSend: function(xhr, settings) {
+                            if (!csrfSafeMethod(settings.type)) {
+                                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                            }
+                        },
+                        url: "/bands/" + bandId + "/events/" + eventId+ "/setlist/update/",
+                        data: 
+                        {
+                            sort1: order1,
+                            sort2: order2
+                            // sort1:    $("#sortable1").sortable('serialize'),
+                            // sort2:$("#sortable2").sortable('serialize')
+                        },
+                        success: function(html)
+                        {
+                            //$('.success').fadeIn(500);
+                            //$('.success').fadeOut(500);
+                        }
+                    });
+                } 
+            }).disableSelection();
+
+
         });
     </script>
 

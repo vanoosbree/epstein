@@ -1,92 +1,44 @@
 {% extends "base.html" %}
-
-<script type="text/javascript">
-	$(document).ready(function()
-	{
-		//attach listeners for existing setlist <li>'s
-		attachEvent();
-
-		// for giving the songs in the setlist a unique name
-		var count = 0;
-
-		$("#sortable").sortable();
-
-		$("#songs li").dblclick(function(){
-			$("#setlist ul").append('<li>'+ $(this).html() +'<input type="hidden" name="'+ count +'" value="'+ $(this).html() +'" /></li>');
-
-			$("#no_songs").fadeOut();
-			count++;
-			attachEvent();
-		});
-
-		//attach jQuery to <li>'s that weren't there on page load
-		function attachEvent()
-		{
-			$("#setlist li").dblclick(function(){
-				$(this).remove();
-			});
-		}
-	});
-</script>
-
 {% block content %}
 <div class="container">
 	<ul class="breadcrumb">
-		<li><a href="#">audioarchitect</a> <span class="divider">/</span></li>
+		<li><a href="#">home</a> <span class="divider">/</span></li>
 		<li><a href="#">Dashboard</a> <span class="divider">/</span></li>
-		<li><a href="#">Bang On</a> <span class="divider">/</span></li>
 		<li><a href="#">Event title</a> <span class="divider">/</span></li>
 		<li class="active">Setlist</li>
 	</ul>
 
 	<div id="songs" class="pull-left span6">
 		<h3>Add a song to your song bank</h3>
-		<form action="/setlist/add_song" method="post" >
+		<form id="add-event" action="/bands/{{band.id}}/songs/create/" method="post">
+			{% csrf_token %}
 			<input type="text" name="title" placeholder="Song Title" />
+			<input type="hidden" name="origin" value="setlist" />
+			<input type="hidden" name="event_id" value="{{event.id}}" />
+			<!-- <input type="text" name="description" placeholder="Song Title" /> -->
 			<input type="submit" class="btn btn-inverse btn-mini" value="Add Song" >
 		</form>
-<?php
-	if($titles)
-	{	
-		echo "<h5>Double-click a song to the setlist</h5>
-			<ul id='songlist'>";
-		foreach ($titles as $title)
-		{
-			echo "<li>".$title->title."</li>";
-		}
-		echo "</ul>";
-	}
-	else
-	{
-		echo "<p>You haven't added any songs yet.</p>";
-	}	
-?>
+
+		{% if songs|length > 0  %}
+			<h5>Drag a song to the setlist</h5>
+			<ul id="sortable1" class="connectedSortable">
+			{% for song in songs %}
+				<li class="ui-state-default" id="{{song.id}}">{{song.title}}</li>
+			{% endfor %}
+			</ul>	
+		{% else %}
+			<p>You haven't added any songs yet.</p>
+		{% endif %}
 	</div>
 
 	<div id="setlist" class="pull-left span5">
-		<h3>Setlist for 
-<?php
-			//name of show
-			$description = ($this->session->userdata("description"));
-			// var_dump($description);
-			// die();
-
-			echo $description[0]->description;
-?>		
-		</h3>
-		<h5>Double-click to remove, drag to reorder</h5>
-		<form action="/setlist/update_setlist" method="post" >
-			<ul id="sortable">
-<?php
-		if ($setlist)
-		{
-			foreach ($setlist as $song)
-			{	
-				echo "<li>" . $song . "<input type='hidden' name='". $song  ."' value='". $song ."' /></li>";
-			}
-		}
-?>
+		<h3>Setlist for {{event.description}}</h3> 	
+		<h5>Drag to remove and reorder</h5>
+		<form action="/bands/{{band.id}}/events/{{event.id}}/setlist/update/" method="post" >
+			{% csrf_token %}
+			<ul id="sortable2" class="connectedSortable" band-id="{{band.id}}" event-id="{{event.id}}">
 			</ul>
+			<input type="hidden" name="bogus" value="blahblahblah"/>
 			<input type="submit" class="btn btn-inverse btn-mini" value="Save Setlist" />
 		</form>
 	</div>

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#datepicker").datepicker( { dateFormat: 'yy-mm-dd' } );
+		$("#timepicker").timepicker({ 'scrollDefaultNow': true });
+	});
+</script>
+
+<div class="container">	
+	<ul class="breadcrumb">
+		<li><a href="#">home</a> <span class="divider">/</span></li>
+		<li><a href="#">{{band.name}}</a> <span class="divider">/</span></li>
+		<li class="active">songs</span></li>
+	</ul>
+	
+	<div class="row">
+		<div class="span6">
+			<fieldset>
+			<legend>Edit Song</legend>
+
+			<form id="add-event" action="/bands/{{band.id}}/songs/{{song.id}}/update/" method="post">
+				{% csrf_token %}
+				<!-- <input type="hidden" id="song-title" name="title" value="{{song.title}}" /><br/> -->
+				<input class="span6" type="text" id="song-title" name="title" value="{{song.title}}" /><br/>
+				<input class="span6" type="text" id="song-desc" name="description" value="{{song.description}}" /><br />
+				<input type="submit" class="btn btn-inverse" value="Save" />
+			</form>
+			</fieldset>			
+		</div>
+		
+	</div>
+</div> <!-- div container/DashboardController -->
+
+{% endblock %}

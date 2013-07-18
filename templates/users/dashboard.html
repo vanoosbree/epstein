@@ -1,19 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container" ng-controller="DashboardController">
-	
+<div class="container">
 	<ul class="breadcrumb">
-		<li><a href="#">dashboard</a> <span class="divider">/</span></li>
-		<li class="active">bang on</span></li>
+		<li><a href="#">home</a> <span class="divider">/</span></li>
+		<li class="active">dashboard</span></li>
 	</ul>
-	
 	<div class="row">
-		<div class="span3">
+		<div class="span2">
 			<fieldset>
 			<legend>Bands</legend>
 
-			<ul class='nav nav-pills nav-stacked'>
+			<ul class='nav nav-stacked'>
 				{% if bands.length == 0 %}
 				<p>You don't have any bands!</p>
 				{% endif %}
@@ -21,8 +19,8 @@
 				<li class='dropdown'>
 					<a class="dropdown-toggle" data-toggle='dropdown' href="#">{{band.name}} <b class="caret"></b></a>
 					<ul class="dropdown-menu">
+						<li><a href="/bands/{{band.id}}/">Dashboard</a></li>
 						<li><a href="#">Profile</a></li>
-						<li><a href="#">Events</a></li>
 						<li><a href="/bands/{{band.id}}/leave">Leave Band</a></li>
 					</ul>
 				</li>
@@ -30,14 +28,14 @@
 			</ul>
 			<form action="/bands/create" method="post">
 				{% csrf_token %}
-				<input type="text" name="band_name" placeholder="new band" />	
+				<input type="text" class="span2" name="band_name" placeholder="new band" />	
 				<input type="submit" class="btn btn-inverse" value="New Band" />
 			</form>
-			<a href="#" class="btn btn-inverse">Join Band</a>
+			<!-- <a href="#" class="btn btn-inverse">Join Band</a> -->
 			</fieldset>
 			</br>
 		</div>
-		<div class="span6">
+		<div class="span7">
 			<fieldset>
 			<legend>News Feed</legend>
 

@@ -26,12 +26,45 @@ ul {
 }
 
 ul {
-	margin-left: 0px;
+	/*margin-left: 0px;*/
 }
 ul li{
-	padding-left: 0px; margin-left: 0px;
+	/*padding-left: 0px; margin-left: 0px; margin-bottom: 5px;	*/
 }
 
 h2, h3, h4{
 	margin-bottom: 5px;
+}
+
+#datepicker{
+	width: 113px;
+}
+#timepicker{
+	width: 75px;
+}
+
+.orange{
+	color: #E48C44;
+}
+
+#sortable1, #sortable2 { 
+	cursor: pointer;
+	min-height: 50px;
+	border: 1px solid black;
+	margin-left: 0px;
+	/*list-style-type: none;
+	margin: 0;
+	padding: 0 0 2.5em;
+	float: left;
+	margin-right:
+	10px;*/
+}
+
+#sortable1 li, #sortable2 li {
+	cursor: pointer;
+	margin-left: 0px;
+	/*margin: 0 5px 5px 5px;
+	padding: 5px;
+	font-size: 1.2em;
+	width: 120px;*/
 }

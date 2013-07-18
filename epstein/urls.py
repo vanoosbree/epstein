@@ -29,11 +29,17 @@ urlpatterns = patterns('',
     # event and set list routes
     url( r'^bands/(\d+)/events/(\d+)/$',  'apps.events.views.show',  name='show_event' ),
     url( r'^bands/(\d+)/events/(\d+)/setlist/$',     'apps.setlists.views.setlist',  name='setlist' ),
+    url( r'^bands/(\d+)/events/create/$',     'apps.events.views.create',  name='setlist' ),
 
-    # defunct routes
-    #url( r'^bands/$',       'apps.bands.views.show_bands',  name='show_bands' ),
-    #url( r'^band/$',        'apps.bands.views.dashboard',  name='show_bands' ),
-    #url( r'^events/$',      'apps.events.views.events',  name='home' ),
+    # songs routes
+    url( r'^bands/(\d+)/songs/$',           'apps.songs.views.index',      name='show_songs' ),
+    url( r'^bands/(\d+)/songs/create/$',    'apps.songs.views.create',     name='create_song' ),
+    url( r'^bands/(\d+)/songs/(\d+)/edit/$', 'apps.songs.views.edit_page',  name='edit_song_page' ),
+    url( r'^bands/(\d+)/songs/(\d+)/update/$', 'apps.songs.views.update',     name='modify song data' ),
+    url( r'^bands/(\d+)/songs/(\d+)/delete/$', 'apps.songs.views.delete',     name='modify song data' ),
+
+    url( r'^bands/(\d+)/events/(\d+)/setlist/$', 'apps.setlists.views.index',     name='show set list' ),
+    url( r'^bands/(\d+)/events/(\d+)/setlist/update/$', 'apps.setlists.views.update',     name='show set list' ),
 
     # admin routes
     #url( r'^admin/doc/', include('django.contrib.admindocs.urls') ),
