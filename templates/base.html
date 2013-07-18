@@ -17,6 +17,11 @@
     <script type="text/javascript">
         $(document).ready( function()
         {
+            $("a").tooltip({
+                  'selector': '',
+                  'placement': 'top'
+                });
+
             function csrfSafeMethod(method) {
                 return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
             }
@@ -35,8 +40,6 @@
                 }
                 return cookieValue;
             }
-           
-
             mesos = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             dias = ["S", "M", "T", "W", "T", "F", "S"];
 
@@ -47,9 +50,6 @@
                 req_ajax: { type: 'get', url: 'data.php' }
             });
         
-            //lists in setlists/setlist.html
-
-
             $( "#sortable1, #sortable2" ).sortable({
                 connectWith: ".connectedSortable" 
             });
@@ -94,8 +94,6 @@
                     });
                 } 
             }).disableSelection();
-
-
         });
     </script>
 
@@ -107,9 +105,8 @@
         <div class="navbar-inner">
             <ul class="nav">
                 <li><a class="brand" href="/about"><em>Epstein</em></a></li>
-                <li><a href="/bands">Bands</a></li>
-                <li><a href="/events">Events</a></li>
-    
+                <!-- <li><a href="/bands">Bands</a></li> -->
+                <!-- <li><a href="/events">Events</a></li> -->
             </ul>
             <ul class="nav pull-right">
 
@@ -120,7 +117,7 @@
                     </a>
                     <ul class="dropdown-menu">
                           <li><a href="/users/logout">Log Out</a></li>
-                          <li><a href="/users/profile">Edit Profile</a></li>
+                          <li><a href="#">Edit Profile</a></li>
                     </ul>
                 </li>
                 {% else %}

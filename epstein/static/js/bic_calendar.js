@@ -106,7 +106,7 @@ $.fn.bic_calendar = function(options) {
 				
 				
             //controles para ir al mes siguiente / anterior
-            var botonMesSiguiente = $('<td><a href="#" class="botonmessiguiente"><i class="icon-arrow-right" ></i></a></td>');
+            var botonMesSiguiente = $('<td><a href="#" class="botonmessiguiente"><i class="icon-arrow-right icon-gray" ></i></a></td>');
             botonMesSiguiente.click(function(e){
                 e.preventDefault();
                 mes = (mes + 1) % 12;

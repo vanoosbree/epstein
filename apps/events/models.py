@@ -16,6 +16,6 @@ class Event(models.Model):
 
 	class Meta:
 		db_table = "events"
-
+       
 	# def __unicode__(self):
 	# 	return self.name

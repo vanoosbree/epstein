@@ -10,8 +10,9 @@
 
 <div class="container">	
 	<ul class="breadcrumb">
-		<li><a href="#">{{band.name}}</a> <span class="divider">/</span></li>
-		<li class="active">dashboard</span></li>
+		<li><a href="/dashboard">Home</a> <span class="divider">/</span></li>
+		<li><a href="/bands/{{band.id}}/">{{band.name}}</a> <span class="divider">/</span></li>
+		<li class="active">Dashboard</span></li>
 	</ul>
 	
 	<div class="row">
@@ -27,13 +28,11 @@
 					<input type="submit" class="btn btn-inverse" value="Add Event" />
 				</form>
 			</fieldset>
-			
-
 			<fieldset>
 			<legend>Tools</legend>
 				<ul class='nav nav-stacked'>	
 					<li><a href="/bands/{{band.id}}/songs/">Manage Songs</a></li>
-					<li><a href="/bands/{{band.id}}/profile/">Edit Profile</a></li>
+					<li><a href="#">Edit Profile</a></li>
 				</ul>
 			</fieldset>
 		</div>
@@ -52,8 +51,8 @@
 					<tbody>
 					{% for event in events %}
 					<tr>
-						<td>{{event.date}}<br/>{{event.time}}</td>
-						<td>{{event.description}}</td>
+						<td>{{event.date.date}}<br/>{{event.time}}</td>
+						<td><a href="/bands/{{band.id}}/events/{{event.id}}"/>{{event.description}}</a></td>
 						<td>{{event.address}}</td>
 						<td><a href='/bands/{{band.id}}/events/{{event.id}}/setlist'>view</a></td>
 					</tr>

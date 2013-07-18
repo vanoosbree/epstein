@@ -1,11 +1,9 @@
-# Create your views here.
-#from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-
 from apps.bands.models import Band, UserHasBand
 from apps.events.models import Event 
 
@@ -22,13 +20,12 @@ def do_login(request):
     if user is not None:
         if user.is_active:
             login(request,user)
-            #return render_to_response( "users/dashboard.html", context_instance=RequestContext(request) )
-            HttpResponseRedirect('dashboard')
+            return HttpResponseRedirect('/dashboard/')
         else:
-            return render_to_response( "home.html", {'errors': "Account has been disabled!"}, context_instance=RequestContext(request) )
+            return HttpResponseRedirect('/')
     else:
-        return render_to_response( "home.html", {'errors': "Invalid email/password combo"}, context_instance=RequestContext(request) )
-
+        return HttpResponseRedirect('/')
+        
 # try to logout the user
 def do_logout(request):
     logout(request)
@@ -46,27 +43,26 @@ def create(request):
     user = User.objects.create_user( email, email, password )
     user.first_name = name
     user.save()
-    my_data = { "user" : user }
-    return render_to_response( 'users/index.html', my_data, context_instance=RequestContext(request) )
-
+    
+    user_login = authenticate( username=email, password=password )
+    if user_login is not None:
+        login(request,user_login)
+        return HttpResponseRedirect('/dashboard/')
+    else:
+        return HttpResponseRedirect('/')
+    
 def dashboard(request):
     userid = request.user.id
     pookies = UserHasBand.objects.filter(user_id = userid)
     bands = []
+    band_ids = []
 
     for pook in pookies:
-        bands.append( Band.objects.get(pk=pook.band_id) )
+        band = Band.objects.get(pk=pook.band_id) 
+        bands.append( band )
+        band_ids.append( band.id )
 
+    events = Event.objects.filter(band_id__in=band_ids).order_by('date')[:4]
     news = [ { 'user' : 'John', 'msg' : "The drummer died...no big loss" }, {'user' : 'Bob', 'msg' : "Can't make it to practice!" } ]
-    events = [ { 'date' : 'Aug 30th', 'msg' : "Band Practice" }, {'date' : 'Sep 1st', 'msg' : "Show at Warfield!" } ]
     view_data = { "bands" : bands, "news" : news, "events" : events }
     return render_to_response( 'users/dashboard.html', view_data, context_instance=RequestContext(request) )
-
-# def bands(request):
-#     return render_to_response( 'bands.html', context_instance=RequestContext(request) )
-
-def events(request):
-    return render_to_response( 'events.html', context_instance=RequestContext(request) )
-
-def setlist(request):
-    return render_to_response( 'setlist.html', context_instance=RequestContext(request) )

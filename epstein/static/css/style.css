@@ -6,10 +6,6 @@ ul {
 	cursor: pointer;
 }
 
-#songs {
-	border-right: 4px solid #262626;
-}
-
 #songs input[type=submit] {
 	margin-bottom: 12px;
 }
@@ -20,22 +16,28 @@ ul {
 
 .breadcrumb { padding: 0px; margin: 0px;  border-radius: 0px;  }
 
-
 .row-fluid{
 	margin-bottom: 10px;
 }
 
-ul {
-	/*margin-left: 0px;*/
+#agenda{
+
+	margin-left: 0px;
 }
-ul li{
-	/*padding-left: 0px; margin-left: 0px; margin-bottom: 5px;	*/
+
+.messages{
+	padding-left: 0px; margin-left: 0px; margin-bottom: 5px;
 }
+.messages li{
+	padding-left: 0px; margin-left: 0px; margin-bottom: 5px;	
+}
+
 
 h2, h3, h4{
 	margin-bottom: 5px;
 }
 
+h6{margin: 0px;}
 #datepicker{
 	width: 113px;
 }
@@ -47,11 +49,16 @@ h2, h3, h4{
 	color: #E48C44;
 }
 
+legend{
+	margin-bottom: 5px;
+}
+
 #sortable1, #sortable2 { 
 	cursor: pointer;
 	min-height: 50px;
-	border: 1px solid black;
+	border: 1px solid #D7D7D7;
 	margin-left: 0px;
+	border-radius: 5px;
 	/*list-style-type: none;
 	margin: 0;
 	padding: 0 0 2.5em;
@@ -63,8 +70,6 @@ h2, h3, h4{
 #sortable1 li, #sortable2 li {
 	cursor: pointer;
 	margin-left: 0px;
-	/*margin: 0 5px 5px 5px;
+	margin: 5px 5px 5px 5px;
 	padding: 5px;
-	font-size: 1.2em;
-	width: 120px;*/
 }

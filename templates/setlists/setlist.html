@@ -2,47 +2,49 @@
 {% block content %}
 <div class="container">
 	<ul class="breadcrumb">
-		<li><a href="#">home</a> <span class="divider">/</span></li>
-		<li><a href="#">Dashboard</a> <span class="divider">/</span></li>
-		<li><a href="#">Event title</a> <span class="divider">/</span></li>
+		<li><a href="/dashboard">Home</a> <span class="divider">/</span></li>
+		<li><a href="/bands/{{band.id}}/">{{band.name}}</a> <span class="divider">/</span></li>
+		<li><a href="/bands/{{band.id}}/events/{{event.id}}/">{{event.description}}</a> <span class="divider">/</span></li>
 		<li class="active">Setlist</li>
 	</ul>
+	<fieldset>
+		<legend>Setlist for {{event.description}}</legend>
+		<div id="songs" class="pull-left span6">
+			{% if songs|length > 0  %}
+				<h4>Drag a song to the setlist</h4>
+				<ul id="sortable1" class="connectedSortable">
+				{% for song in songs_avail %}
+					<li class="ui-state-default" id="{{song.id}}">{{song.title}}</li>
+				{% endfor %}
+				</ul>	
+			{% else %}
+				<p>You haven't added any songs yet.</p>
+			{% endif %}
 
-	<div id="songs" class="pull-left span6">
-		<h3>Add a song to your song bank</h3>
-		<form id="add-event" action="/bands/{{band.id}}/songs/create/" method="post">
-			{% csrf_token %}
-			<input type="text" name="title" placeholder="Song Title" />
-			<input type="hidden" name="origin" value="setlist" />
-			<input type="hidden" name="event_id" value="{{event.id}}" />
-			<!-- <input type="text" name="description" placeholder="Song Title" /> -->
-			<input type="submit" class="btn btn-inverse btn-mini" value="Add Song" >
-		</form>
-
-		{% if songs|length > 0  %}
-			<h5>Drag a song to the setlist</h5>
-			<ul id="sortable1" class="connectedSortable">
-			{% for song in songs %}
-				<li class="ui-state-default" id="{{song.id}}">{{song.title}}</li>
-			{% endfor %}
-			</ul>	
-		{% else %}
-			<p>You haven't added any songs yet.</p>
-		{% endif %}
-	</div>
-
-	<div id="setlist" class="pull-left span5">
-		<h3>Setlist for {{event.description}}</h3> 	
-		<h5>Drag to remove and reorder</h5>
-		<form action="/bands/{{band.id}}/events/{{event.id}}/setlist/update/" method="post" >
-			{% csrf_token %}
-			<ul id="sortable2" class="connectedSortable" band-id="{{band.id}}" event-id="{{event.id}}">
-			</ul>
-			<input type="hidden" name="bogus" value="blahblahblah"/>
-			<input type="submit" class="btn btn-inverse btn-mini" value="Save Setlist" />
-		</form>
-	</div>
-	<div class="clearfix"></div>
+			<h4>Add a song to your song bank</h4>
+			<form id="add-event" action="/bands/{{band.id}}/songs/create/" method="post">
+				{% csrf_token %}
+				<input type="text" name="title" placeholder="Song Title" />
+				<input type="hidden" name="origin" value="setlist" />
+				<input type="hidden" name="event_id" value="{{event.id}}" />
+				<!-- <input type="text" name="description" placeholder="Song Title" /> -->
+				<input type="submit" class="btn btn-inverse btn-mini" value="Add Song" >
+			</form>
+		</div>
+		<div id="setlist" class="pull-left span5">
+			<h4>Drag to reorder (auto saved)</h4>
+			<form action="/bands/{{band.id}}/events/{{event.id}}/setlist/update/" method="post" >
+				{% csrf_token %}
+				<ul id="sortable2" class="connectedSortable" band-id="{{band.id}}" event-id="{{event.id}}">
+					{% for song in songs_in_set %}
+					<li class="ui-state-default" id="{{song.id}}">{{song.title}}</li>
+				{% endfor %}
+				</ul>
+				<!-- <input type="submit" class="btn btn-inverse btn-mini" value="Save Setlist" /> -->
+			</form>
+		</div>
+		<!-- <div class="clearfix"></div> -->		
+	</fieldset>
 </div>
 
 {% endblock %}

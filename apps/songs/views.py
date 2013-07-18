@@ -23,7 +23,6 @@ def edit_page(request,bandid,songid):
 def update(request,bandid,songid):
     new_title 		= request.POST.get( 'title', '')
     new_desc		= request.POST.get( 'description', '' )
-    # song_id			= request.POST.get( 'song_id', '' )
     song			= Song.objects.get(pk=songid)
     song.title 		= new_title
     song.description= new_desc

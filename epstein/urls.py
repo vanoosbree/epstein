@@ -27,10 +27,12 @@ urlpatterns = patterns('',
     url( r'^bands/(\d+)/leave/$',   'apps.bands.views.leave',  name='show_bands' ),
 
     # event and set list routes
-    url( r'^bands/(\d+)/events/(\d+)/$',  'apps.events.views.show',  name='show_event' ),
-    url( r'^bands/(\d+)/events/(\d+)/setlist/$',     'apps.setlists.views.setlist',  name='setlist' ),
-    url( r'^bands/(\d+)/events/create/$',     'apps.events.views.create',  name='setlist' ),
-
+    url( r'^bands/(\d+)/events/(\d+)/$',        'apps.events.views.show',  name='show_event' ),
+    url( r'^bands/(\d+)/events/(\d+)/setlist/$','apps.setlists.views.setlist',  name='setlist' ),
+    url( r'^bands/(\d+)/events/create/$',       'apps.events.views.create',  name='setlist' ),
+    url( r'^bands/(\d+)/events/(\d+)/edit/$',   'apps.events.views.edit',  name='setlist' ),
+    url( r'^bands/(\d+)/events/(\d+)/update/$', 'apps.events.views.update',  name='setlist' ),
+    
     # songs routes
     url( r'^bands/(\d+)/songs/$',           'apps.songs.views.index',      name='show_songs' ),
     url( r'^bands/(\d+)/songs/create/$',    'apps.songs.views.create',     name='create_song' ),

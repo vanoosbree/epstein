@@ -41,8 +41,12 @@
 				<tr>
 					<td>{{song.title}}</td>
 					<td>{{song.description}}</td>
-					<td><a href="/bands/{{band.id}}/songs/{{song.id}}/edit/">Edit</a>
-						<a href="/bands/{{band.id}}/songs/{{song.id}}/delete/">Delete</a>
+					<td><a href="/bands/{{band.id}}/songs/{{song.id}}/edit/" rel="tooltip" title="Edit Song">
+							<i class="icon-pencil"></i>
+						</a>
+						<a href="/bands/{{band.id}}/songs/{{song.id}}/delete/" rel="tooltip" title="Delete Song">
+							<i class="icon-trash"></i>
+						</a>
 					</td>
 				</tr>
 				{% endfor %}

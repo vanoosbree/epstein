@@ -1,32 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#datepicker").datepicker();
-		$("#timepicker").timepicker({ 'scrollDefaultNow': true });
-	});
-</script>
-
 <div class="container">
 	<ul class="breadcrumb">
   			<li><a href="/dashboard">Home</a> <span class="divider">/</span></li>
-  			<li><a href="#">{{band}}</a> <span class="divider">/</span></li>
-  			<li class="active"><a href="/bands/4/">Events</a><span class="divider">/</span></li>
-  			<li class="active">Gig at that Place</li>
+  			<li><a href="/bands/{{band.id}}/">{{band.name}}</a> <span class="divider">/</span></li>
+  			<li class="active">{{event.description}}</li>
 		</ul>
 	
 	<div class="container" ng-controller="FirstControl">
-		<h3>Gig at that Place - May 30th, 2013</h3>
+		<h3>{{event.description}} - {{event.date.date}} at {{event.time}}<a href="/bands/{{band.id}}/events/{{event.id}}/edit/"> (edit)</a></h3>
 		<div class="row">
 			<div class="span8">
 				<fieldset>
 				<legend>Logistics</legend>
 				<div class="row">
 					<div class="span5">
-						<p>12345 Main Street</p>
-						<p>San Francisco, CA</p>
-						<p>Bill Jones - (415)555-1234</p>
+						<h6>Address</h6>
+						<p>{{event.address}}</p>
+						<h6>Contact Info</h6>
+						<p>Bill Jones 415-555-1234</p>
 					</div>
 
 					<div class="span3">
@@ -38,34 +31,43 @@
 			<div class="span4">
 				<fieldset>
 					<legend>Agenda</legend>
-					<ul>
-						<li>Something</li>
-						<li>Something else</li>
-						<li>Blah blah</li>
+					<ul id="agenda">
+						<li>8:00pm Arrive at venue</li>
+						<li>8:30pm Soundcheck</li>
+						<li>9:00pm Get wasted</li>
+						<li>9:10pm Kicked out by bartender</li>
 					</ul>
 					<form>
-						<input type="text" placeholder="new item"><br/>
+						<input type="text" placeholder="new item">
 					</form>
-			
-					<a class="btn btn-inverse" href='/setlist'>View/Edit Set List</a>
+					<a class="btn btn-inverse" href='/bands/{{band.id}}/events/{{event.id}}/setlist/'>Set List</a>
 				</fieldset>
 			</div> <!-- div span7 -->
 		</div>
 		
 		<div class='row'>
+			<div class="span12">
 			<fieldset>
 				<legend>Communication Wall</legend>
-				<table class="table table-striped">
-					<tr ng-repeat="msg in messages">
-						<td>{{msg.user}}</td>
-						<td>{{msg.message}}</td>
+				<!-- <table class="table table-striped">
+					{% for msg in messages %}
+					<tr>
+						<td>{{msg.user}}: {{msg.message}}</td>
 					</tr>
-				</table>
+					{% endfor %}
+				</table> -->
 
-				<form ng-submit="addMessage()">
-					<input type="text" placeholder="new message" class="span6" ng-model="newMsg"/>
+				<ul class="messages">
+				{% for msg in messages %}
+					<li>{{msg.user}}: {{msg.message}}</li>
+				{% endfor %}
+				</ul>
+
+				<form action="/bands/{{band.id}}/events/{{event.id}}/message/create" method="post">
+					<input type="text" placeholder="new message" class="span6"/>
 				</form>
 			</fieldset>
+		</div>
 		</div>
 	</div> <!-- div row -->	
 </div>

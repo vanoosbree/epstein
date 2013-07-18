@@ -3,8 +3,8 @@
 {% block content %}
 <div class="container">
 	<ul class="breadcrumb">
-		<li><a href="#">home</a> <span class="divider">/</span></li>
-		<li class="active">dashboard</span></li>
+		<li><a href="#">Home</a> <span class="divider">/</span></li>
+		<li class="active">Dashboard</span></li>
 	</ul>
 	<div class="row">
 		<div class="span2">
@@ -12,7 +12,7 @@
 			<legend>Bands</legend>
 
 			<ul class='nav nav-stacked'>
-				{% if bands.length == 0 %}
+				{% if bands|length == 0 %}
 				<p>You don't have any bands!</p>
 				{% endif %}
 				{% for band in bands %}
@@ -57,11 +57,11 @@
 			<legend>Upcoming Events</legend>
 			<table class="table table-striped">
 				{% for event in events %}
-				<tr><td><a href="#">{{event.msg}}</a></td></tr>
+				<tr><td><a href="#">{{event.date.date}} at {{event.time}}<br/> {{event.description}}</a></td></tr>
 				{% endfor %}
 			</table>
 
-			<button class="btn btn-inverse">New Event</button>
+			<!-- <button class="btn btn-inverse">New Event</button> -->
 			</fieldset>
 		</div>
 	</div>
