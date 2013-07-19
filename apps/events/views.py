@@ -10,7 +10,7 @@ def show(request, bandid, eventid):
     events = {}
     cur_band = Band.objects.get(pk=bandid)
     event = Event.objects.get(pk=eventid)
-    messages = [ { 'user': 'John', 'message' : 'I am a ninja' }, { 'user': 'Singer', 'message' : 'I need drugs!' } ]
+    messages = [ { 'user': 'John', 'message' : 'This is a placeholder message' }, { 'user': 'Singer', 'message' : 'This will be implemented soon...promise!' } ]
    
     view_data = { 'band' : cur_band, 'event' : event, 'messages' : messages }
     return render_to_response( 'events/event.html', view_data, context_instance=RequestContext(request) )

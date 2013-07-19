@@ -15,6 +15,12 @@ def dashboard(request, id):
     view_data 	= { 'band' : cur_band, 'events' : events }
     return render_to_response( 'bands/dashboard.html', view_data, context_instance=RequestContext(request) )
 
+def list(request):
+    bands   = Band.objects.get()
+  
+  
+    return HttpResponseRedirect('/dashboard/')
+
 def join(request, band_id):
     this_user 	= request.user
     this_band 	= Band.objects.get(pk=band_id)

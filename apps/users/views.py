@@ -63,6 +63,6 @@ def dashboard(request):
         band_ids.append( band.id )
 
     events = Event.objects.filter(band_id__in=band_ids).order_by('date')[:4]
-    news = [ { 'user' : 'John', 'msg' : "The drummer died...no big loss" }, {'user' : 'Bob', 'msg' : "Can't make it to practice!" } ]
+    news = [ { 'user' : 'John', 'msg' : "Placeholder text..." }, {'user' : 'Bob', 'msg' : "I will implement this soon!!!" } ]
     view_data = { "bands" : bands, "news" : news, "events" : events }
     return render_to_response( 'users/dashboard.html', view_data, context_instance=RequestContext(request) )
