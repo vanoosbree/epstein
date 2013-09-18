@@ -170,7 +170,6 @@ LOGGING = {
     }
 }
 
-#TEMPLATE_CONTEXT_PROCESSORS = ( 'django.core.context_processor.request', )
 TEMPLATE_CONTEXT_PROCESSOR = (
     'django.contrib.auto.context_processors.auth',
 )
